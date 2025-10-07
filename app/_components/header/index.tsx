@@ -3,10 +3,6 @@
 import Link from "next/link";
 
 export default function Header() {
-  // const pathname = usePathname();
-
-  // const rentCarPath = pathname.includes("rentCar");
-
   return (
     <header className="border border-navbar/40 bg-white px-6 py-8 2xl:py-10 2xl:pe-8 2xl:ps-16">
       <div className="flex flex-col-reverse gap-y-8 lg:flex-row lg:justify-between">
@@ -17,32 +13,7 @@ export default function Header() {
           >
             MORENT
           </Link>
-          {/* {!rentCarPath && <SearchInput />} */}
         </div>
-        {/* <div className="flex items-center justify-between gap-x-5">
-          <div className="hidden gap-x-5 lg:flex">
-            <NavButton>
-              <HeartIcon className="*:fill-secondary-400" />
-            </NavButton>
-            <NotificationsButton />
-            <NavButton>
-              <SettingsIcon />
-            </NavButton>
-          </div>
-          <button className="lg:hidden">
-            <HamburgerIcon />
-          </button>
-          <div className="relative size-7 cursor-pointer sm:size-11">
-            <Image
-              priority
-              src={profile}
-              sizes="100%"
-              fill
-              className="object-contain"
-              alt="Profile picture"
-            />
-          </div>
-        </div> */}
       </div>
     </header>
   );

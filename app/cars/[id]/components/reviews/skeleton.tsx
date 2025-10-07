@@ -13,7 +13,7 @@ export default function ReviewsSkeleton({ pageSize }: ReviewsSkeletonProps) {
         <div className="size-4 rounded-full bg-primary-300" />
       </div>
       <div className="grid gap-y-6">
-        {[...Array(pageSize).keys()].map((index) => (
+        {[...new Array(pageSize).keys()].map((index) => (
           <div key={index}>
             <div className="flex gap-x-4">
               <ProfileIcon />

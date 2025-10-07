@@ -45,7 +45,7 @@ export default function ListOfSeats() {
           key={name}
           id={name}
           value={name}
-          defaultChecked={seats?.some((seat) => seat === name)}
+          defaultChecked={seats?.includes(name)}
           onChange={onChange}
           label={CarSeat[Number(name)]}
           subLabel={value}

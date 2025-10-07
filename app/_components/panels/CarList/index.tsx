@@ -26,24 +26,16 @@ export default function CarList({
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useGetCarList(pageSize, searchParams);
 
-  function Title() {
-    if (title) {
-      return (
-        <CarListTitle
-          title={title}
-          searchParams={searchParams}
-          showMoreCars={showMoreCars}
-        />
-      );
-    }
-
-    return null;
-  }
-
   if (isLoading)
     return (
       <div>
-        <Title />
+        {title && (
+          <CarListTitle
+            title={title}
+            searchParams={searchParams}
+            showMoreCars={showMoreCars}
+          />
+        )}
         <CarListSkeleton
           className={clsx("grid gap-8", className)}
           totalCars={pageSize}
@@ -57,7 +49,13 @@ export default function CarList({
 
   return (
     <div>
-      <Title />
+      {title && (
+        <CarListTitle
+          title={title}
+          searchParams={searchParams}
+          showMoreCars={showMoreCars}
+        />
+      )}
       <div {...rest} className={clsx("grid gap-5 2xl:gap-8", className)}>
         {data?.pages.map((group) => (
           <Fragment key={JSON.stringify(group)}>

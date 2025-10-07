@@ -18,9 +18,7 @@ export async function GET(request: NextRequest) {
       : undefined;
 
     const seatsRaw = searchParams.get("seats");
-    const seats = seatsRaw
-      ? seatsRaw.split(",").map((seat) => Number(seat))
-      : undefined;
+    const seats = seatsRaw ? seatsRaw.split(",").map(Number) : undefined;
 
     const priceRaw = searchParams.get("price");
     const price = priceRaw ? Number(priceRaw) : undefined;

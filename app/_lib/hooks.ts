@@ -99,7 +99,7 @@ export function useCarTotalTypes(category: string | null) {
 }
 
 export function useCarTotalSeats(category: string | null) {
-  let values = Object.values(CarSeat).map((carSeat) => Number(carSeat));
+  let values = Object.values(CarSeat).map(Number);
   values = values.splice(values.length / 2, values.length / 2);
 
   const initialData = values.reduce((acc, curr) => {

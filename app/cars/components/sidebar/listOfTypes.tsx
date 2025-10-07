@@ -43,7 +43,7 @@ export default function ListOfTypes() {
           key={name}
           id={name}
           value={name}
-          defaultChecked={types?.some((type) => type === name)}
+          defaultChecked={types?.includes(name)}
           onChange={onChange}
           label={name}
           subLabel={value}

@@ -2,7 +2,7 @@
 
 import PrimaryButton from "./_components/buttons/primary";
 
-export default function Error({ reset }: { reset: () => void }) {
+export default function ErrorComponent({ reset }: { reset: () => void }) {
   return (
     <div className="m-auto flex flex-col">
       <h2 className="mb-4">Something went wrong!</h2>

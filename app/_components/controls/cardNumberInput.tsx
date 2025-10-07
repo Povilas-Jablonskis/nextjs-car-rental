@@ -9,6 +9,17 @@ interface FormInputProps<T extends object>
   control: Control<T>;
 }
 
+function parse(value: string) {
+  let rawValue = value.replaceAll(/\D+/g, "");
+  if (rawValue.length > 16) rawValue = rawValue.substring(0, 16);
+
+  return rawValue;
+}
+
+function format(value: string | undefined) {
+  return value?.match(/.{1,4}/g)?.join(" ") ?? "";
+}
+
 export default function CardNumberInput<T extends object>({
   name,
   control,
@@ -21,17 +32,6 @@ export default function CardNumberInput<T extends object>({
     name,
     control,
   });
-
-  function parse(value: string) {
-    let rawValue = value.replace(/\D+/g, "");
-    if (rawValue.length > 16) rawValue = rawValue.substring(0, 16);
-
-    return rawValue;
-  }
-
-  function format(value: string | undefined) {
-    return value?.match(/.{1,4}/g)?.join(" ") ?? "";
-  }
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     field.onChange(parse(event.target.value));

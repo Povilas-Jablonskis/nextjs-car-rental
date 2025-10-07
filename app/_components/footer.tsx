@@ -16,25 +16,25 @@ export default function Footer() {
             About
           </span>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             How it works
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Featured
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Partnership
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Bussiness Relation
@@ -45,25 +45,25 @@ export default function Footer() {
             Community
           </span>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Events
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Blog
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Podcast
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Invite a friend
@@ -74,25 +74,25 @@ export default function Footer() {
             Socials
           </span>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Discord
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Instagram
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Twitter
           </a>
           <a
-            href=""
+            href="#"
             className="text-base font-medium text-secondary-300 lg:text-footer"
           >
             Facebook
@@ -106,13 +106,13 @@ export default function Footer() {
         </span>
         <div className="flex justify-between gap-x-14">
           <a
-            href=""
+            href="#"
             className="text-xs font-semibold text-secondary-500 lg:text-base"
           >
             Privacy & Policy
           </a>
           <a
-            href=""
+            href="#"
             className="text-xs font-semibold text-secondary-500 lg:text-base"
           >
             Terms & Condition

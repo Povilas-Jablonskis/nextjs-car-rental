@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import PrimaryButton from "../buttons/primary";
 import Ad from "./ad";
 import AdSkeleton from "./skeleton";
+import randomIndexOfArray from "@/app/_helpers/randomIndexOfArray";
 
 interface Variation {
   background?: string;
@@ -32,7 +33,7 @@ export default function Ads() {
   return (
     <div className="mb-8 grid gap-8 md:grid-cols-2">
       {data?.map(({ id, title, subTitle, car }) => {
-        const variationIndex = Math.floor(Math.random() * variations.length);
+        const variationIndex = randomIndexOfArray(variations);
 
         return (
           <Ad

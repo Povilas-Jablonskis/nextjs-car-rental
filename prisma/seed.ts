@@ -1,3 +1,4 @@
+import randomIndexOfArray from "@/app/_helpers/randomIndexOfArray";
 import {
   Ads,
   CarCategory,
@@ -279,8 +280,7 @@ async function main() {
       return prisma.reviews.create({
         data: {
           ...data,
-          carId:
-            insertedCars[Math.floor(Math.random() * insertedCars.length)].id,
+          carId: insertedCars[randomIndexOfArray(insertedCars)].id,
         },
       });
     }),
@@ -291,20 +291,18 @@ async function main() {
       return prisma.ads.create({
         data: {
           ...data,
-          carId:
-            insertedCars[Math.floor(Math.random() * insertedCars.length)].id,
+          carId: insertedCars[randomIndexOfArray(insertedCars)].id,
         },
       });
     }),
   );
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+try {
+  await main();
+  await prisma.$disconnect();
+} catch (e) {
+  console.error(e);
+  await prisma.$disconnect();
+  process.exit(1);
+}

@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
       ? CarCategory[categoryRaw as keyof typeof CarCategory]
       : undefined;
 
-    let values = Object.values(CarSeat).map((seat) => Number(seat));
+    let values = Object.values(CarSeat).map(Number);
     values = values.splice(values.length / 2, values.length / 2);
 
     const response = (

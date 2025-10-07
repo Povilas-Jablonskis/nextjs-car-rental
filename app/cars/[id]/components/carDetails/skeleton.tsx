@@ -9,7 +9,7 @@ export default function CarDetailsSkeleton() {
           <GalleryIcon className="m-auto" width={60} height={60} />
         </div>
         <div className="mx-auto grid grid-cols-3 gap-x-5 xl:mx-0 xl:gap-x-6">
-          {[...Array(3).keys()].map((index) => (
+          {[...new Array(3).keys()].map((index) => (
             <div
               key={index}
               className="h-16 w-20 rounded-xl border-4 border-white p-1.5 xl:h-32 xl:w-full xl:p-4"

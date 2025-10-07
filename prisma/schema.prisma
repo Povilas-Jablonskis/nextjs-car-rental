@@ -52,6 +52,7 @@ model Cars {
   oldPrice    Decimal?      @db.Money
   favourite   Boolean
   reviews     Reviews[]
+  ads         Ads[]
 }
 
 model Reviews {
@@ -62,8 +63,16 @@ model Reviews {
   workplace   String
   image       String
   date        DateTime
-  Cars        Cars     @relation(fields: [carsId], references: [id])
-  carsId      String
+  car         Cars     @relation(fields: [carId], references: [id])
+  carId       String
+}
+
+model Ads {
+  id       String @id @default(uuid())
+  title    String
+  subTitle String
+  car      Cars   @relation(fields: [carId], references: [id])
+  carId    String
 }
 
 enum CarCategory {

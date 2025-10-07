@@ -1,37 +1,49 @@
 "use client";
 
 import { useGetCarList } from "@/app/_lib/hooks";
-import { CarCategory } from "@prisma/client";
 import clsx from "clsx";
 import { Fragment } from "react";
 import PrimaryButton from "../../buttons/primary";
 
 import CarListItem from "./item";
 import CarListSkeleton from "./skeleton";
+import CarListTitle from "./title";
 
 interface CarListProps extends React.HTMLAttributes<HTMLDivElement> {
   pageSize: number;
-  categories: CarCategory[];
-  searchParams?: Record<string, string>;
   showMoreCars?: boolean;
+  searchParams: Record<string, string>;
 }
 
 export default function CarList({
   pageSize,
-  categories,
-  searchParams,
   showMoreCars,
+  searchParams,
   className,
-  children,
+  title,
   ...rest
 }: CarListProps) {
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useGetCarList(pageSize, categories, searchParams);
+    useGetCarList(pageSize, searchParams);
+
+  function Title() {
+    if (title) {
+      return (
+        <CarListTitle
+          title={title}
+          searchParams={searchParams}
+          showMoreCars={showMoreCars}
+        />
+      );
+    }
+
+    return null;
+  }
 
   if (isLoading)
     return (
       <div>
-        {children}
+        <Title />
         <CarListSkeleton
           className={clsx("grid gap-8", className)}
           totalCars={pageSize}
@@ -45,13 +57,11 @@ export default function CarList({
 
   return (
     <div>
-      {children}
+      <Title />
       <div {...rest} className={clsx("grid gap-5 2xl:gap-8", className)}>
         {data?.pages.map((group) => (
           <Fragment key={JSON.stringify(group)}>
-            {group?.data.map((car) => (
-              <CarListItem key={car.id} car={car} searchParams={searchParams} />
-            ))}
+            {group?.data.map((car) => <CarListItem key={car.id} car={car} />)}
           </Fragment>
         ))}
       </div>

@@ -5,17 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}"
+      "command": "yarn dev"
     },
     {
       "type": "chrome",
       "request": "attach",
-      "name": "Attach to Chrome",
-      "urlFilter": "http://localhost:5173/*",
+      "name": "Next.js: debug client-side",
+      "urlFilter": "http://localhost:3000/*",
       "port": 9222,
       "webRoot": "${workspaceFolder}"
     }

@@ -1,4 +1,4 @@
-import { CarCategory, Cars, CarType, Prisma, Reviews } from "@prisma/client";
+import { Cars, CarType, Prisma, Reviews } from "@prisma/client";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CarSeat } from "../api/cars/totalSeats/types";
 
@@ -9,24 +9,26 @@ export interface InfiniteQueryResponse<T extends object> {
 
 export function useGetCarList(
   pageSize: number,
-  categories: CarCategory[],
-  searchParams?: Record<string, string>,
+  searchParams: Record<string, string>,
 ) {
   return useInfiniteQuery<InfiniteQueryResponse<Cars>>({
-    queryKey: ["fetchCars", pageSize, categories, searchParams],
+    queryKey: ["fetchCars", pageSize, searchParams],
     queryFn: async ({ pageParam }) => {
       const params = new URLSearchParams(searchParams);
       const paramsStr = params.size ? `&${params.toString()}` : "";
-      const categoriesStr = `&categories=${categories.join(",")}`;
       const response = await fetch(
-        `/api/cars?pageNumber=${pageParam}&pageSize=${pageSize}${categoriesStr}${paramsStr}`,
+        `/api/cars?pageNumber=${pageParam}&pageSize=${pageSize}${paramsStr}`,
       );
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result);
+      }
+
       return result;
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.pageNumber,
-    refetchOnWindowFocus: false,
   });
 }
 
@@ -42,9 +44,13 @@ export function useGetCar(id: string) {
     queryFn: async () => {
       const response = await fetch(`/api/cars/${id}`);
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result);
+      }
+
       return result;
     },
-    refetchOnWindowFocus: false,
   });
 }
 
@@ -56,15 +62,19 @@ export function useGetReviews(pageSize: number, carId: string) {
         `/api/reviews/${carId}?pageNumber=${pageParam}&pageSize=${pageSize}`,
       );
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result);
+      }
+
       return result;
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.pageNumber,
-    refetchOnWindowFocus: false,
   });
 }
 
-export function useCarTotalTypes() {
+export function useCarTotalTypes(category: string | null) {
   const values = Object.values(CarType);
 
   const initialData = values.reduce((acc, curr) => {
@@ -72,18 +82,23 @@ export function useCarTotalTypes() {
   }, {});
 
   return useQuery<Record<string, number>>({
-    queryKey: ["fetchCarTotalTypes", initialData],
+    queryKey: ["fetchCarTotalTypes", category],
     queryFn: async () => {
-      const response = await fetch("/api/cars/totalTypes");
+      const categoryStr = category ? `?category=${category}` : "";
+      const response = await fetch(`/api/cars/totalTypes${categoryStr}`);
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result);
+      }
+
       return result;
     },
     initialData,
-    refetchOnWindowFocus: false,
   });
 }
 
-export function useCarTotalSeats() {
+export function useCarTotalSeats(category: string | null) {
   let values = Object.values(CarSeat).map((carSeat) => Number(carSeat));
   values = values.splice(values.length / 2, values.length / 2);
 
@@ -92,13 +107,40 @@ export function useCarTotalSeats() {
   }, {});
 
   return useQuery<Record<number, number>>({
-    queryKey: ["fetchCarTotalSeats", initialData],
+    queryKey: ["fetchCarTotalSeats", category],
     queryFn: async () => {
-      const response = await fetch("/api/cars/totalSeats");
+      const categoryStr = category ? `?category=${category}` : "";
+      const response = await fetch(`/api/cars/totalSeats${categoryStr}`);
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result);
+      }
+
       return result;
     },
     initialData,
-    refetchOnWindowFocus: false,
+  });
+}
+
+export function useAds() {
+  return useQuery<
+    Prisma.AdsGetPayload<{
+      include: {
+        car: true;
+      };
+    }>[]
+  >({
+    queryKey: ["fetchAds"],
+    queryFn: async () => {
+      const response = await fetch("/api/ads");
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result);
+      }
+
+      return result;
+    },
   });
 }

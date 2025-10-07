@@ -28,6 +28,7 @@ const config: Config = {
         },
         information: {
           500: "#54A6FF",
+          700: "#2A60B7",
         },
         background: "#F6F7F9",
       },

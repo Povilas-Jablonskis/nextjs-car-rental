@@ -1,10 +1,17 @@
-import { CarType, PrismaClient } from "@prisma/client";
+import { CarCategory, CarType, PrismaClient } from "@prisma/client";
 import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const prisma = new PrismaClient();
+
+    const searchParams = request.nextUrl.searchParams;
+
+    const categoryRaw = searchParams.get("category");
+    const category = categoryRaw
+      ? CarCategory[categoryRaw as keyof typeof CarCategory]
+      : undefined;
 
     const values = Object.values(CarType);
 
@@ -14,6 +21,7 @@ export async function GET() {
           const count = await prisma.cars.count({
             where: {
               type: { equals: value },
+              category: { has: category },
             },
           });
 
@@ -28,8 +36,9 @@ export async function GET() {
       throw error;
     }
 
-    return NextResponse.json({
-      apiMessage: { errorMsg: "Failed to fetch car types." },
-    });
+    return NextResponse.json(
+      { error: "Failed to fetch car types." },
+      { status: 500 },
+    );
   }
 }

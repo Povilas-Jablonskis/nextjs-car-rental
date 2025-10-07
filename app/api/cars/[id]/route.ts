@@ -26,8 +26,9 @@ export async function GET(_: NextRequest, segmentData: { params: Params }) {
       throw error;
     }
 
-    return NextResponse.json({
-      apiMessage: { errorMsg: "Failed to fetch car." },
-    });
+    return NextResponse.json(
+      { error: "Failed to fetch car." },
+      { status: 500 },
+    );
   }
 }

@@ -11,7 +11,7 @@ export default function ListOfTypes() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const { data } = useCarTotalTypes();
+  const { data } = useCarTotalTypes(searchParams.get("category"));
 
   const typesRaw = searchParams.get("types");
   let types = typesRaw ? typesRaw.split(",") : [];

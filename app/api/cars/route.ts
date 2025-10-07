@@ -25,11 +25,9 @@ export async function GET(request: NextRequest) {
     const priceRaw = searchParams.get("price");
     const price = priceRaw ? Number(priceRaw) : undefined;
 
-    const categoriesRaw = searchParams.get("categories");
-    const categories = categoriesRaw
-      ? categoriesRaw
-          .split(",")
-          .map((category) => CarCategory[category as keyof typeof CarCategory])
+    const categoryRaw = searchParams.get("category");
+    const category = categoryRaw
+      ? CarCategory[categoryRaw as keyof typeof CarCategory]
       : undefined;
 
     const count = await prisma.cars.count({
@@ -37,7 +35,7 @@ export async function GET(request: NextRequest) {
         price: { lte: price },
         type: { in: types },
         seats: { in: seats },
-        category: { hasEvery: categories ?? [] },
+        category: { has: category },
       },
     });
 
@@ -48,7 +46,7 @@ export async function GET(request: NextRequest) {
         price: { lte: price },
         type: { in: types },
         seats: { in: seats },
-        category: { hasEvery: categories ?? [] },
+        category: { has: category },
       },
     });
 
@@ -67,8 +65,9 @@ export async function GET(request: NextRequest) {
       throw error;
     }
 
-    return NextResponse.json({
-      apiMessage: { errorMsg: "Failed to fetch cars." },
-    });
+    return NextResponse.json(
+      { error: "Failed to fetch cars." },
+      { status: 500 },
+    );
   }
 }

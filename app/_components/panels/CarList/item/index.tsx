@@ -13,14 +13,9 @@ import CarProperty from "./carProperty";
 
 interface CarListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   car: Cars;
-  searchParams?: Record<string, string>;
 }
 
-export default function CarListItem({
-  car,
-  searchParams,
-  ...rest
-}: CarListItemProps) {
+export default function CarListItem({ car, ...rest }: CarListItemProps) {
   const { push } = useRouter();
 
   return (
@@ -63,13 +58,7 @@ export default function CarListItem({
             </s>
           )}
         </div>
-        <PrimaryButton
-          onClick={() =>
-            push(
-              `/cars/${car.id}?${new URLSearchParams(searchParams).toString()}`,
-            )
-          }
-        >
+        <PrimaryButton onClick={() => push(`/cars/${car.id}`)}>
           Rent Now
         </PrimaryButton>
       </div>

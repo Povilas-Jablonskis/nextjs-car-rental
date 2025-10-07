@@ -11,7 +11,7 @@ export default function ListOfSeats() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const { data } = useCarTotalSeats();
+  const { data } = useCarTotalSeats(searchParams.get("category"));
 
   const seatsRaw = searchParams.get("seats");
   let seats = seatsRaw ? seatsRaw.split(",") : [];

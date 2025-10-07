@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 
 interface CarListTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   searchParams?: Record<string, string>;
+  showMoreCars?: boolean;
 }
 
 export default function CarListTitle({
   searchParams,
+  showMoreCars,
   title,
   className,
   ...rest
@@ -26,7 +28,7 @@ export default function CarListTitle({
         </span>
       )}
 
-      {searchParams && (
+      {searchParams && !showMoreCars && (
         <button
           className="text-end text-xs font-semibold text-primary-500 sm:text-base"
           onClick={() =>

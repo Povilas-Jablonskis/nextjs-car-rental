@@ -22,7 +22,7 @@ export async function GET(
 
     const count = await prisma.reviews.count({
       where: {
-        carsId: { equals: id },
+        carId: { equals: id },
       },
     });
 
@@ -30,7 +30,7 @@ export async function GET(
       skip: currentPageNumber * pageSize,
       take: pageSize,
       where: {
-        carsId: { equals: id },
+        carId: { equals: id },
       },
     });
 
@@ -49,8 +49,9 @@ export async function GET(
       throw error;
     }
 
-    return NextResponse.json({
-      apiMessage: { errorMsg: "Failed to fetch reviews." },
-    });
+    return NextResponse.json(
+      { error: "Failed to fetch reviews." },
+      { status: 500 },
+    );
   }
 }

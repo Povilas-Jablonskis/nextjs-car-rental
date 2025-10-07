@@ -1,4 +1,4 @@
-import { Suspense, use } from "react";
+import { use } from "react";
 import CarList from "../_components/panels/CarList";
 import ListOfSeats from "./components/sidebar/listOfSeats";
 import ListOfTypes from "./components/sidebar/listOfTypes";
@@ -14,11 +14,9 @@ export default function Page({ searchParams }: PageProps) {
   return (
     <div className="flex">
       <div className="hidden flex-col gap-y-14 bg-white p-6 lg:flex">
-        <Suspense>
-          <ListOfTypes />
-          <ListOfSeats />
-          <SelectPrice />
-        </Suspense>
+        <ListOfTypes />
+        <ListOfSeats />
+        <SelectPrice />
       </div>
       <div className="flex-1 px-6 py-8 2xl:p-8">
         {/* <PickupDropoffPicker breakpoint="xl" /> */}
@@ -27,7 +25,6 @@ export default function Page({ searchParams }: PageProps) {
             className="sm:grid-cols-2 xl:grid-cols-3"
             pageSize={9}
             searchParams={resolvedSearchParams}
-            categories={[]}
           />
         </div>
       </div>

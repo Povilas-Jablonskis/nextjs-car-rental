@@ -17,7 +17,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={clsx(
           plus_jakarta_sans.className,
-          "bg-background text-xs sm:text-sm",
+          "flex h-screen flex-col bg-background text-xs sm:text-sm",
         )}
       >
         <Providers>

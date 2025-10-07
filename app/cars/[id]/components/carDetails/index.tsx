@@ -26,9 +26,7 @@ export default function CarDetails({ params }: CarDetailsProps) {
         <ImageSlider />
         <CarInformation car={data} />
       </div>
-      {!!data.reviews.length && (
-        <Reviews params={params} totalReviews={data.reviews.length} />
-      )}
+      <Reviews params={params} totalReviews={data.reviews.length} />
     </>
   );
 }

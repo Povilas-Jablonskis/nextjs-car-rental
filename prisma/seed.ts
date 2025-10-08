@@ -1,4 +1,3 @@
-import randomIndexOfArray from "@/app/_helpers/randomIndexOfArray";
 import {
   Ads,
   CarCategory,
@@ -7,6 +6,12 @@ import {
   PrismaClient,
   Reviews,
 } from "@prisma/client";
+
+function randomIndexOfArray<T>(arr: Array<T>) {
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  return array[0] % arr.length;
+}
 
 const cars: Omit<Cars, "id">[] = [
   {
@@ -265,44 +270,45 @@ const ads: Omit<Ads, "id" | "carId">[] = [
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.reviews.deleteMany();
-  await prisma.ads.deleteMany();
-  await prisma.cars.deleteMany();
+  try {
+    await prisma.reviews.deleteMany();
+    await prisma.ads.deleteMany();
+    await prisma.cars.deleteMany();
 
-  const insertedCars = await Promise.all(
-    cars.map(async (data) => {
-      return prisma.cars.create({ data });
-    }),
-  );
+    const insertedCars = await Promise.all(
+      cars.map(async (data) => {
+        return prisma.cars.create({ data });
+      }),
+    );
 
-  await Promise.all(
-    reviews.map(async (data) => {
-      return prisma.reviews.create({
-        data: {
-          ...data,
-          carId: insertedCars[randomIndexOfArray(insertedCars)].id,
-        },
-      });
-    }),
-  );
+    await Promise.all(
+      reviews.map(async (data) => {
+        return prisma.reviews.create({
+          data: {
+            ...data,
+            carId: insertedCars[randomIndexOfArray(insertedCars)].id,
+          },
+        });
+      }),
+    );
 
-  await Promise.all(
-    ads.map(async (data) => {
-      return prisma.ads.create({
-        data: {
-          ...data,
-          carId: insertedCars[randomIndexOfArray(insertedCars)].id,
-        },
-      });
-    }),
-  );
+    await Promise.all(
+      ads.map(async (data) => {
+        return prisma.ads.create({
+          data: {
+            ...data,
+            carId: insertedCars[randomIndexOfArray(insertedCars)].id,
+          },
+        });
+      }),
+    );
+
+    await prisma.$disconnect();
+  } catch (e) {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  }
 }
 
-try {
-  await main();
-  await prisma.$disconnect();
-} catch (e) {
-  console.error(e);
-  await prisma.$disconnect();
-  process.exit(1);
-}
+main();

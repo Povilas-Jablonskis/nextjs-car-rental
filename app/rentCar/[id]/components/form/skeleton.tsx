@@ -11,7 +11,7 @@ function FormInputWithTitle() {
 
 export default function RentalFormSkeleton() {
   return (
-    <div className="grid gap-8 xl:grid-cols-[auto_36%]">
+    <div className="grid animate-pulse gap-8 xl:grid-cols-[auto_36%]">
       <div className="grid gap-y-8 *:rounded-xl *:bg-white *:px-4 *:py-5 2xl:*:p-6">
         <div>
           <div className="flex justify-between pb-6 2xl:pb-9">

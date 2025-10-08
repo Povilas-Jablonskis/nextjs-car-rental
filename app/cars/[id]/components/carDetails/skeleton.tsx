@@ -3,7 +3,7 @@ import HeartIcon from "@/app/_components/icons/heart";
 
 export default function CarDetailsSkeleton() {
   return (
-    <div className="grid gap-8 xl:grid-cols-[auto_1fr]">
+    <div className="grid animate-pulse gap-8 xl:grid-cols-[auto_1fr]">
       <div className="grid gap-y-6">
         <div className="flex h-80 rounded-xl bg-white xl:h-96 xl:w-[500px]">
           <GalleryIcon className="m-auto" width={60} height={60} />

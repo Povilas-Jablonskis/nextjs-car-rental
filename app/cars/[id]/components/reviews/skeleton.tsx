@@ -7,7 +7,7 @@ interface ReviewsSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function ReviewsSkeleton({ pageSize }: ReviewsSkeletonProps) {
   return (
-    <div className="grid rounded-xl bg-white p-6">
+    <div className="grid animate-pulse rounded-xl bg-white p-6">
       <div className="mb-8 flex gap-x-3">
         <div className="h-4 w-20 rounded-lg bg-primary-300 sm:w-28" />
         <div className="size-4 rounded-full bg-primary-300" />

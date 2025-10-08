@@ -3,7 +3,7 @@ import HeartIcon from "@/app/_components/icons/heart";
 
 export default function CarListItemSkeleton() {
   return (
-    <div className="flex flex-col rounded-xl bg-white p-4 2xl:p-6">
+    <div className="flex animate-pulse flex-col rounded-xl bg-white p-4 2xl:p-6">
       <div className="mb-2 flex place-content-between">
         <div className="h-7 w-28 rounded-lg bg-primary-300" />
         <HeartIcon />

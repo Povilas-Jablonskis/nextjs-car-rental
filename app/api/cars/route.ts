@@ -30,10 +30,10 @@ export async function GET(request: NextRequest) {
 
     const count = await prisma.cars.count({
       where: {
-        price: { lte: price },
-        type: { in: types },
-        seats: { in: seats },
-        category: { has: category },
+        ...(price ? { price: { lte: price } } : undefined),
+        ...(types ? { type: { in: types } } : undefined),
+        ...(seats ? { seats: { in: seats } } : undefined),
+        ...(category ? { category: { has: category } } : undefined),
       },
     });
 
@@ -41,10 +41,10 @@ export async function GET(request: NextRequest) {
       skip: currentPageNumber * pageSize,
       take: pageSize,
       where: {
-        price: { lte: price },
-        type: { in: types },
-        seats: { in: seats },
-        category: { has: category },
+        ...(price ? { price: { lte: price } } : undefined),
+        ...(types ? { type: { in: types } } : undefined),
+        ...(seats ? { seats: { in: seats } } : undefined),
+        ...(category ? { category: { has: category } } : undefined),
       },
     });
 

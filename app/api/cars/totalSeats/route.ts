@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
           const count = await prisma.cars.count({
             where: {
               seats: { equals: value },
-              category: { has: category },
+              ...(category ? { category: { has: category } } : undefined),
             },
           });
 

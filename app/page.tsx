@@ -1,8 +1,11 @@
+"use client";
+
 import { CarCategory } from "@prisma/client";
 import Ads from "./_components/ads";
 import CarList from "./_components/panels/CarList";
+import { withTransitionContext } from "./_hoc/withTransitionContext";
 
-export default function Home() {
+function Home() {
   return (
     <div className="px-6 py-8 pb-16 2xl:px-16">
       <Ads />
@@ -25,3 +28,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default withTransitionContext(Home);

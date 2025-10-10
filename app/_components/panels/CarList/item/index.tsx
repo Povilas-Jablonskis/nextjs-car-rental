@@ -1,6 +1,6 @@
 "use client";
 
-import PrimaryButton from "@/app/_components/buttons/primary";
+import TransitionButton from "@/app/_components/buttons/transition";
 import Favourite from "@/app/_components/favourite";
 import GearTypeIcon from "@/app/_components/icons/gearType";
 import SeatsIcon from "@/app/_components/icons/seats";
@@ -8,7 +8,6 @@ import TankSizeIcon from "@/app/_components/icons/tankSize";
 import formatNumber from "@/app/_helpers/formatNumber";
 import { Cars } from "@prisma/client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import CarProperty from "./carProperty";
 
 interface CarListItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,8 +15,6 @@ interface CarListItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export default function CarListItem({ car, ...rest }: CarListItemProps) {
-  const { push } = useRouter();
-
   return (
     <div {...rest} className="flex flex-col rounded-xl bg-white p-4 2xl:p-6">
       <div className="flex place-content-between">
@@ -58,9 +55,7 @@ export default function CarListItem({ car, ...rest }: CarListItemProps) {
             </s>
           )}
         </div>
-        <PrimaryButton onClick={() => push(`/cars/${car.id}`)}>
-          Rent Now
-        </PrimaryButton>
+        <TransitionButton url={`/cars/${car.id}`}>Rent Now</TransitionButton>
       </div>
     </div>
   );

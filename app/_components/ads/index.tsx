@@ -1,22 +1,21 @@
 "use client";
 
+import randomIndexOfArray from "@/app/_helpers/randomIndexOfArray";
 import { useAds } from "@/app/_lib/hooks";
 import clsx from "clsx";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import PrimaryButton from "../buttons/primary";
+import { memo } from "react";
+import TransitionButton from "../buttons/transition";
 import Ad from "./ad";
 import AdSkeleton from "./skeleton";
-import randomIndexOfArray from "@/app/_helpers/randomIndexOfArray";
 
 interface Variation {
   background?: string;
   button?: string;
 }
 
-export default function Ads() {
+function Ads() {
   const { data, isLoading } = useAds();
-  const { push } = useRouter();
 
   if (isLoading) return <AdSkeleton />;
 
@@ -42,12 +41,12 @@ export default function Ads() {
             subTitle={subTitle}
             className={variations[variationIndex].background}
           >
-            <PrimaryButton
-              onClick={() => push(`/cars/${car.id}`)}
+            <TransitionButton
+              url={`/cars/${car.id}`}
               className={clsx(variations[variationIndex].button, "self-start")}
             >
               Rent Now
-            </PrimaryButton>
+            </TransitionButton>
             <div className="relative mt-auto h-28">
               <Image
                 priority
@@ -63,3 +62,5 @@ export default function Ads() {
     </div>
   );
 }
+
+export default memo(Ads);

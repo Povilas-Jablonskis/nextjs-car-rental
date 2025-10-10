@@ -1,12 +1,11 @@
 "use client";
 
-import PrimaryButton from "@/app/_components/buttons/primary";
+import TransitionButton from "@/app/_components/buttons/transition";
 import Favourite from "@/app/_components/favourite";
 import Rating from "@/app/_components/rating";
 import formatNumber from "@/app/_helpers/formatNumber";
 
 import { Prisma } from "@prisma/client";
-import { useRouter } from "next/navigation";
 
 function DescriptionItem({ name, value }: { name: string; value: string }) {
   return (
@@ -39,8 +38,6 @@ interface CarInformationProps extends React.HTMLAttributes<HTMLDivElement> {
   }>;
 }
 export default function CarInformation({ car, ...rest }: CarInformationProps) {
-  const { push } = useRouter();
-
   const score = Math.round(
     car.reviews.reduce((prev, curr) => prev + curr.score, 0) /
       car.reviews.length,
@@ -90,12 +87,12 @@ export default function CarInformation({ car, ...rest }: CarInformationProps) {
             </s>
           )}
         </div>
-        <PrimaryButton
+        <TransitionButton
+          url={`/rentCar/${car.id}`}
           className="!px-8 !py-4 !font-bold"
-          onClick={() => push(`/rentCar/${car.id}`)}
         >
           Rent Now
-        </PrimaryButton>
+        </TransitionButton>
       </div>
     </div>
   );

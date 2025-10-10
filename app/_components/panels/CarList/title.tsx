@@ -1,7 +1,9 @@
 "use client";
 
+import { TransitionContext } from "@/app/_contexts/transitionContext";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 interface CarListTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   searchParams?: Record<string, string>;
@@ -17,6 +19,8 @@ export default function CarListTitle({
 }: CarListTitleProps) {
   const { push } = useRouter();
 
+  const { isPending, startTransition } = useContext(TransitionContext);
+
   return (
     <div
       {...rest}
@@ -30,9 +34,12 @@ export default function CarListTitle({
 
       {searchParams && !showMoreCars && (
         <button
-          className="text-end text-xs font-semibold text-primary-500 sm:text-base"
+          disabled={isPending}
+          className="text-end text-xs font-semibold text-primary-500 disabled:pointer-events-none disabled:opacity-40 sm:text-base"
           onClick={() =>
-            push(`/cars?${new URLSearchParams(searchParams).toString()}`)
+            startTransition?.(() =>
+              push(`/cars?${new URLSearchParams(searchParams).toString()}`),
+            )
           }
         >
           View All

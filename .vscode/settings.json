@@ -1,5 +1,10 @@
 {
   "files.associations": {
     "*.css": "tailwindcss"
+  },
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always"
   }
 }

@@ -15,12 +15,12 @@ import RentalInfoPicker from "./rentalInfoPicker";
 import FormSection from "./section";
 
 export default function RentalForm() {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(data: FormSchema) {
-    setLoading(true);
+    setIsLoading(true);
     await rentCar(data);
-    setLoading(false);
+    setIsLoading(false);
   }
 
   const methods = useForm<FormSchema>({

@@ -28,24 +28,23 @@ export async function GET(request: NextRequest) {
       ? CarCategory[categoryRaw as keyof typeof CarCategory]
       : undefined;
 
-    const count = await prisma.cars.count({
-      where: {
-        ...(price ? { price: { lte: price } } : undefined),
-        ...(types ? { type: { in: types } } : undefined),
-        ...(seats ? { seats: { in: seats } } : undefined),
-        ...(category ? { category: { has: category } } : undefined),
-      },
-    });
+    function constructFilter() {
+      return {
+        where: {
+          ...(price ? { price: { lte: price } } : undefined),
+          ...(types ? { type: { in: types } } : undefined),
+          ...(seats ? { seats: { in: seats } } : undefined),
+          ...(category ? { category: { has: category } } : undefined),
+        },
+      };
+    }
+
+    const count = await prisma.cars.count(constructFilter());
 
     const cars = await prisma.cars.findMany({
       skip: currentPageNumber * pageSize,
       take: pageSize,
-      where: {
-        ...(price ? { price: { lte: price } } : undefined),
-        ...(types ? { type: { in: types } } : undefined),
-        ...(seats ? { seats: { in: seats } } : undefined),
-        ...(category ? { category: { has: category } } : undefined),
-      },
+      ...constructFilter(),
     });
 
     const nextPageNumberCandidate = currentPageNumber + 1;

@@ -4,7 +4,7 @@ import randomIndexOfArray from "@/app/_helpers/randomIndexOfArray";
 import { useAds } from "@/app/_lib/hooks";
 import clsx from "clsx";
 import Image from "next/image";
-import { memo } from "react";
+import { useMemo } from "react";
 import TransitionButton from "../buttons/transition";
 import Ad from "./ad";
 import AdSkeleton from "./skeleton";
@@ -17,8 +17,6 @@ interface Variation {
 function Ads() {
   const { data, isLoading } = useAds();
 
-  if (isLoading) return <AdSkeleton />;
-
   const variations: Variation[] = [
     {
       background: "bg-information-500 bg-informationImage",
@@ -29,9 +27,9 @@ function Ads() {
     },
   ];
 
-  return (
-    <div className="mb-8 grid gap-8 md:grid-cols-2">
-      {data?.map(({ id, title, subTitle, car }) => {
+  const ads = useMemo(
+    () =>
+      data?.map(({ id, title, subTitle, car }) => {
         const variationIndex = randomIndexOfArray(variations);
 
         return (
@@ -58,9 +56,13 @@ function Ads() {
             </div>
           </Ad>
         );
-      })}
-    </div>
+      }),
+    [data],
   );
+
+  if (isLoading) return <AdSkeleton />;
+
+  return <div className="mb-8 grid gap-8 md:grid-cols-2">{ads}</div>;
 }
 
-export default memo(Ads);
+export default Ads;

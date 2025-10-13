@@ -1,5 +1,5 @@
 import { TransitionContext } from "@/app/_contexts/transitionContext";
-import { useTransition } from "react";
+import { useMemo, useTransition } from "react";
 
 export function withTransitionContext<T extends object>(
   WrappedComponent: React.FC<T>,
@@ -10,8 +10,13 @@ export function withTransitionContext<T extends object>(
   const ComponentWithTransitionContext = (props: T) => {
     const [isPending, startTransition] = useTransition();
 
+    const theContextValues = useMemo(
+      () => ({ isPending, startTransition }),
+      [isPending],
+    );
+
     return (
-      <TransitionContext.Provider value={{ isPending, startTransition }}>
+      <TransitionContext.Provider value={theContextValues}>
         <WrappedComponent {...props} />
       </TransitionContext.Provider>
     );

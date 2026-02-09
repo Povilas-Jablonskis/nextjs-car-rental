@@ -55,7 +55,9 @@ export default function CarListItem({ car, ...rest }: CarListItemProps) {
             </s>
           )}
         </div>
-        <TransitionButton url={`/cars/${car.id}`}>Rent Now</TransitionButton>
+        <TransitionButton url={`/cars/byId/${car.id}`}>
+          Rent Now
+        </TransitionButton>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import FormRadio from "@/app/_components/controls/Form/radio";
 import BitcoinIcon from "@/app/_components/icons/bitcoin";
 import PayPalIcon from "@/app/_components/icons/payPal";
 import VisaMastercardIcon from "@/app/_components/icons/visaMastercard";
-import { FormSchema, PaymentMethod } from "@/app/rentCar/[id]/types";
+import { FormSchema, PaymentMethod } from "@/app/rentCar/byId/[id]/types";
 
 import { useFormContext } from "react-hook-form";
 

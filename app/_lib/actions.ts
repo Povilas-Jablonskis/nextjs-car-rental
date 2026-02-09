@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { formSchema, FormSchema } from "../rentCar/[id]/types";
+import { formSchema, FormSchema } from "../rentCar/byId/[id]/types";
 
 export type State = {
   errors?: Record<string, string[]>;

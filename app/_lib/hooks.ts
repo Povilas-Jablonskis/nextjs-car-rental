@@ -19,11 +19,12 @@ export function useGetCarList(
       const response = await fetch(
         `/api/cars?pageNumber=${pageParam}&pageSize=${pageSize}${paramsStr}`,
       );
-      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result);
+        throw new Error(response.statusText);
       }
+
+      const result = await response.json();
 
       return result;
     },
@@ -42,12 +43,13 @@ export function useGetCar(id: string) {
   >({
     queryKey: ["fetchCar", id],
     queryFn: async () => {
-      const response = await fetch(`/api/cars/${id}`);
-      const result = await response.json();
+      const response = await fetch(`/api/cars/byId/${id}`);
 
       if (!response.ok) {
-        throw new Error(result);
+        throw new Error(response.statusText);
       }
+
+      const result = await response.json();
 
       return result;
     },
@@ -59,13 +61,14 @@ export function useGetReviews(pageSize: number, carId: string) {
     queryKey: ["fetchReviews", pageSize, carId],
     queryFn: async ({ pageParam }) => {
       const response = await fetch(
-        `/api/reviews/${carId}?pageNumber=${pageParam}&pageSize=${pageSize}`,
+        `/api/reviews/byId/${carId}?pageNumber=${pageParam}&pageSize=${pageSize}`,
       );
-      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result);
+        throw new Error(response.statusText);
       }
+
+      const result = await response.json();
 
       return result;
     },
@@ -86,11 +89,12 @@ export function useCarTotalTypes(category: string | null) {
     queryFn: async () => {
       const categoryStr = category ? `?category=${category}` : "";
       const response = await fetch(`/api/cars/totalTypes${categoryStr}`);
-      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result);
+        throw new Error(response.statusText);
       }
+
+      const result = await response.json();
 
       return result;
     },
@@ -111,11 +115,12 @@ export function useCarTotalSeats(category: string | null) {
     queryFn: async () => {
       const categoryStr = category ? `?category=${category}` : "";
       const response = await fetch(`/api/cars/totalSeats${categoryStr}`);
-      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result);
+        throw new Error(response.statusText);
       }
+
+      const result = await response.json();
 
       return result;
     },
@@ -134,11 +139,12 @@ export function useAds() {
     queryKey: ["fetchAds"],
     queryFn: async () => {
       const response = await fetch("/api/ads");
-      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result);
+        throw new Error(response.statusText);
       }
+
+      const result = await response.json();
 
       return result;
     },

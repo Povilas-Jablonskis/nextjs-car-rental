@@ -40,7 +40,7 @@ function Ads() {
             className={variations[variationIndex].background}
           >
             <TransitionButton
-              url={`/cars/${car.id}`}
+              url={`/cars/byId/${car.id}`}
               className={clsx(variations[variationIndex].button, "self-start")}
             >
               Rent Now
@@ -57,7 +57,7 @@ function Ads() {
           </Ad>
         );
       }),
-    [data],
+    [data, variations],
   );
 
   if (isLoading) return <AdSkeleton />;

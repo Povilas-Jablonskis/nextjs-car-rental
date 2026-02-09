@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { rentCar } from "../../../../_lib/actions";
+import { rentCar } from "../../../../../_lib/actions";
 import { FormSchema, formSchema, PaymentMethod } from "../../types";
 import PaymentMethodComponent from "./paymentMethod";
 import RentalInfoPicker from "./rentalInfoPicker";

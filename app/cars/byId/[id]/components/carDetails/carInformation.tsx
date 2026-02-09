@@ -88,7 +88,7 @@ export default function CarInformation({ car, ...rest }: CarInformationProps) {
           )}
         </div>
         <TransitionButton
-          url={`/rentCar/${car.id}`}
+          url={`/rentCar/byId/${car.id}`}
           className="!px-8 !py-4 !font-bold"
         >
           Rent Now

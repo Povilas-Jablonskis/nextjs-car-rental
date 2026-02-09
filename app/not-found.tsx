@@ -9,7 +9,7 @@ export default function NotFoundComponent() {
         className="flex place-items-center self-center rounded-md border border-transparent bg-primary-500 px-4 py-2 text-xs font-semibold text-white focus:border-primary-focused active:bg-primary-700 disabled:pointer-events-none disabled:opacity-40 sm:px-6 sm:py-3.5 sm:text-base"
         href="/"
       >
-        Not Found
+        Return Home
       </Link>
     </div>
   );

@@ -1,6 +1,6 @@
 import { createContext, TransitionStartFunction } from "react";
 
-type TransitionContextType = {
+export type TransitionContextType = {
   isPending?: boolean;
   startTransition?: TransitionStartFunction;
 };

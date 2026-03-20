@@ -1,6 +1,7 @@
 # Jest Test Coverage Plan - Next.js Car Rental
 
 ## Current Testing Status
+
 - ✅ 3 tests written (formatNumber utility, TransitionButton component, CarListTitle component)
 - ⚠️ Many tests for EXISTING functionality are missing and should be written for regression prevention
 - ❌ New/critical functionality completely untested
@@ -14,8 +15,10 @@
 These features are already coded and partially tested, but need comprehensive test coverage:
 
 ### `formatNumber()` Utility - Expand Tests
+
 **Current Tests:** Basic formatting scenarios
 **Additional Tests Needed:**
+
 - ✗ Test with Decimal('0') (zero values)
 - ✗ Test with very large numbers
 - ✗ Test with very small decimal values
@@ -26,8 +29,10 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/_helpers/__tests__/formatNumber.test.ts` (expand existing)
 
 ### `TransitionButton` Component - Expand Tests
+
 **Current Tests:** Basic click and startTransition call
 **Additional Tests Needed:**
+
 - ✗ Test disabled state (if applicable)
 - ✗ Test loading state (isPending = true)
 - ✗ Test button text rendering
@@ -41,8 +46,10 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/_components/buttons/__tests__/transition.test.tsx` (expand existing)
 
 ### `CarListTitle` Component - Expand Tests
+
 **Current Tests:** Basic click and startTransition call
 **Additional Tests Needed:**
+
 - ✗ Test rendering with different searchParams
 - ✗ Test with empty searchParams
 - ✗ Test with single filter applied
@@ -63,6 +70,7 @@ These features are already coded and partially tested, but need comprehensive te
 ### 1. **API Routes Testing**
 
 #### `/api/cars/route.ts` - Car List Endpoint
+
 - ✗ Query parameter parsing (pageNumber, pageSize)
 - ✗ Filter logic:
   - Filter by price range
@@ -80,6 +88,7 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/api/cars/__tests__/route.test.ts`
 
 #### `/api/cars/byId/[id]/route.ts` - Single Car Endpoint
+
 - ✗ Fetch car by valid ID
 - ✗ Include reviews relationship
 - ✗ Handle non-existent car ID (404)
@@ -88,6 +97,7 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/api/cars/byId/__tests__/route.test.ts`
 
 #### `/api/cars/totalTypes/route.ts` - Car Types Count Endpoint
+
 - ✗ Count all car types
 - ✗ Count car types filtered by category
 - ✗ Invalid category parameter handling
@@ -96,6 +106,7 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/api/cars/totalTypes/__tests__/route.test.ts`
 
 #### `/api/cars/totalSeats/route.ts` - Seats Count Endpoint
+
 - ✗ Count all seat options
 - ✗ Filtering by category
 - ✗ Error handling
@@ -103,6 +114,7 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/api/cars/totalSeats/__tests__/route.test.ts`
 
 #### `/api/reviews/byId/[id]/route.ts` - Reviews Pagination
+
 - ✗ Fetch reviews for car with pagination
 - ✗ Invalid car ID handling
 - ✗ Pagination logic
@@ -114,6 +126,7 @@ These features are already coded and partially tested, but need comprehensive te
 ### 2. **Custom Hooks Testing**
 
 #### `useGetCarList()` Hook
+
 - ✗ Initial query setup
 - ✗ Infinite query pagination
 - ✗ Search params passed to API correctly
@@ -125,24 +138,28 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/_lib/__tests__/hooks.test.ts`
 
 #### `useGetCar()` Hook
+
 - ✗ Fetch single car by ID
 - ✗ Handle car not found
 - ✗ Cache behavior
 - ✗ Error states
 
 #### `useGetReviews()` Hook
+
 - ✗ Infinite pagination for reviews
 - ✗ Car ID parameter handling
 - ✗ Error handling
 - ✗ Page detection
 
 #### `useCarTotalTypes()` Hook
+
 - ✗ Fetch car type counts
 - ✗ Filter by category
 - ✗ Initial data population
 - ✗ Cache updates
 
 #### `useCarTotalSeats()` Hook
+
 - ✗ Fetch seat options
 - ✗ Category filtering
 - ✗ Error handling
@@ -152,6 +169,7 @@ These features are already coded and partially tested, but need comprehensive te
 ### 3. **Form Validation Testing**
 
 #### `formSchema` & Related Schemas (Zod Validation)
+
 - ✗ **Base Fields Validation:**
   - Customer name required and trimmed
   - Phone number required and trimmed
@@ -190,6 +208,7 @@ These features are already coded and partially tested, but need comprehensive te
 ### 4. **Server Actions Testing**
 
 #### `rentCar()` Server Action
+
 - ✗ Valid form data with all payment methods:
   - Credit card path
   - PayPal path
@@ -208,6 +227,7 @@ These features are already coded and partially tested, but need comprehensive te
 ### 5. **Component Tests**
 
 #### Form Components
+
 - ✗ `Input` Component (`controls/input.tsx`):
   - Renders label when provided
   - Displays error message when error prop exists
@@ -230,6 +250,7 @@ These features are already coded and partially tested, but need comprehensive te
   - Disabled state
 
 #### Interactive Components
+
 - ✗ `Favourite` Component (`favourite.tsx`):
   - Initializes with defaultFavourite state
   - Toggles favorite on click
@@ -242,6 +263,7 @@ These features are already coded and partially tested, but need comprehensive te
   - Loading states
 
 #### Filter/Search Components
+
 - ✗ `DateTimeLocationPicker` Component:
   - Accepts and displays date inputs
   - Accepts and displays location inputs
@@ -256,6 +278,7 @@ These features are already coded and partially tested, but need comprehensive te
   - Apply filters functionality
 
 **Test Files:**
+
 - `app/_components/controls/__tests__/input.test.tsx`
 - `app/_components/controls/__tests__/checkbox.test.tsx`
 - `app/_components/controls/__tests__/radio.test.tsx`
@@ -269,6 +292,7 @@ These features are already coded and partially tested, but need comprehensive te
 ### 6. **Utility Functions**
 
 #### `randomIndexOfArray()`
+
 - ✗ Returns valid array index
 - ✗ Index within bounds (0 to array.length - 1)
 - ✗ Works with single-element arrays
@@ -278,6 +302,7 @@ These features are already coded and partially tested, but need comprehensive te
 **Test File:** `app/_helpers/__tests__/randomIndexOfArray.test.ts`
 
 #### Additional Helper Tests
+
 - ✗ URL parameter construction
 - ✗ Filter parameter serialization
 - ✗ Date formatting utilities
@@ -298,27 +323,27 @@ These features are already coded and partially tested, but need comprehensive te
 
 ## 📋 Summary Table
 
-| Category | Feature | Priority | Status | Test File |
-|----------|---------|----------|--------|-----------|
-| API | Cars list with filters | HIGH | ❌ | `api/cars/__tests__/route.test.ts` |
-| API | Car by ID | HIGH | ❌ | `api/cars/byId/__tests__/route.test.ts` |
-| API | Car types count | HIGH | ❌ | `api/cars/totalTypes/__tests__/route.test.ts` |
-| API | Car seats count | HIGH | ❌ | `api/cars/totalSeats/__tests__/route.test.ts` |
-| API | Reviews pagination | HIGH | ❌ | `api/reviews/byId/__tests__/route.test.ts` |
-| Hooks | useGetCarList | HIGH | ❌ | `_lib/__tests__/hooks.test.ts` |
-| Hooks | useGetCar | HIGH | ❌ | `_lib/__tests__/hooks.test.ts` |
-| Hooks | useGetReviews | HIGH | ❌ | `_lib/__tests__/hooks.test.ts` |
-| Hooks | useCarTotalTypes | HIGH | ❌ | `_lib/__tests__/hooks.test.ts` |
-| Hooks | useCarTotalSeats | HIGH | ❌ | `_lib/__tests__/hooks.test.ts` |
-| Form | Zod Schema Validation | HIGH | ❌ | `rentCar/byId/[id]/__tests__/types.test.ts` |
-| Actions | rentCar Server Action | HIGH | ❌ | `_lib/__tests__/actions.test.ts` |
-| Components | Input Form Field | MEDIUM | ❌ | `_components/controls/__tests__/input.test.tsx` |
-| Components | Checkbox Control | MEDIUM | ❌ | `_components/controls/__tests__/checkbox.test.tsx` |
-| Components | Favourite Button | MEDIUM | ❌ | `_components/__tests__/favourite.test.tsx` |
-| Components | TransitionButton | MEDIUM | ⚠️ | Needs expansion: loading state, error handling |
-| Components | CarListTitle | MEDIUM | ⚠️ | Needs expansion: more filter scenarios |
-| Utilities | formatNumber | MEDIUM | ⚠️ | Needs expansion: null handling, edge cases |
-| Utilities | randomIndexOfArray | MEDIUM | ❌ | `_helpers/__tests__/randomIndexOfArray.test.ts` |
+| Category   | Feature                | Priority | Status | Test File                                          |
+| ---------- | ---------------------- | -------- | ------ | -------------------------------------------------- |
+| API        | Cars list with filters | HIGH     | ❌     | `api/cars/__tests__/route.test.ts`                 |
+| API        | Car by ID              | HIGH     | ❌     | `api/cars/byId/__tests__/route.test.ts`            |
+| API        | Car types count        | HIGH     | ❌     | `api/cars/totalTypes/__tests__/route.test.ts`      |
+| API        | Car seats count        | HIGH     | ❌     | `api/cars/totalSeats/__tests__/route.test.ts`      |
+| API        | Reviews pagination     | HIGH     | ❌     | `api/reviews/byId/__tests__/route.test.ts`         |
+| Hooks      | useGetCarList          | HIGH     | ❌     | `_lib/__tests__/hooks.test.ts`                     |
+| Hooks      | useGetCar              | HIGH     | ❌     | `_lib/__tests__/hooks.test.ts`                     |
+| Hooks      | useGetReviews          | HIGH     | ❌     | `_lib/__tests__/hooks.test.ts`                     |
+| Hooks      | useCarTotalTypes       | HIGH     | ❌     | `_lib/__tests__/hooks.test.ts`                     |
+| Hooks      | useCarTotalSeats       | HIGH     | ❌     | `_lib/__tests__/hooks.test.ts`                     |
+| Form       | Zod Schema Validation  | HIGH     | ❌     | `rentCar/byId/[id]/__tests__/types.test.ts`        |
+| Actions    | rentCar Server Action  | HIGH     | ❌     | `_lib/__tests__/actions.test.ts`                   |
+| Components | Input Form Field       | MEDIUM   | ❌     | `_components/controls/__tests__/input.test.tsx`    |
+| Components | Checkbox Control       | MEDIUM   | ❌     | `_components/controls/__tests__/checkbox.test.tsx` |
+| Components | Favourite Button       | MEDIUM   | ❌     | `_components/__tests__/favourite.test.tsx`         |
+| Components | TransitionButton       | MEDIUM   | ⚠️     | Needs expansion: loading state, error handling     |
+| Components | CarListTitle           | MEDIUM   | ⚠️     | Needs expansion: more filter scenarios             |
+| Utilities  | formatNumber           | MEDIUM   | ⚠️     | Needs expansion: null handling, edge cases         |
+| Utilities  | randomIndexOfArray     | MEDIUM   | ❌     | `_helpers/__tests__/randomIndexOfArray.test.ts`    |
 
 ---
 
